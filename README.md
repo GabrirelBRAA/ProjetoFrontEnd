@@ -1,4 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Como rodar
+- `git clone <repo-link>`
+- `cd <repo>`
+- `npm install`
+- `npm run dev`
+
+
+
+
+![login](/login.png)
+![recuperar](/recuperar.png)
+![reset](/reset.png)
+
+- Implementei um protótipo de mandar emails mas não daria tempo de implementar os emails com expiração. As chaves da minha API do mailtrap ainda estão no código mas eu comentei a função de disparo.
+
+- Não implementei o design exato do documento mas o que está ai é facilmente adaptável ao design proposto.
 
 ## Getting Started
 
