@@ -32,8 +32,11 @@ export default function PasswordReset({ open, closeDialog }) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setErrors(validateValues(inputFields));
-        setResetDone(true);
+        let errors = validateValues(inputFields);
+        setErrors(errors);
+        if (!errors.hasOwnProperty('password') && !errors.hasOwnProperty("confirm_password")) {
+            setResetDone(true);
+        }
     };
 
     return <dialog open={open} onClose={closeDialog} class="overflow-y-auto overflow-x-hidden px-4 fixed top-0 right-0 left-0 z-50 justify-center items-center rounded-lg md:inset-0 w-96 h-2/4 bg-gray-300">
@@ -48,45 +51,45 @@ export default function PasswordReset({ open, closeDialog }) {
                 <span class="sr-only">Fechar Modal</span>
             </button>
         </div>
-        {resetDone? <p class="px-8 mt-40 text-green-500">Senha redefinida com sucesso!</p> : (
-        <form onSubmit={handleSubmit}>
-            <p class="mb-2">Redefina sua senha com no mínimo 8 caracteres</p>
-            <label> Senha
-                <input
-                    class="block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-solid border-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-400"
-                    type="password"
-                    name="password"
-                    value={inputFields.password}
-                    onChange={handleChange}
-                    placeholder="Ex: Minhanovesenha123@" />
-            </label>
-            {errors.password ? (
-                <p class="text-red-500">
-                    {errors.password}
-                </p>
-            ) : <div class="mb-8"></div>}
-            <label> Confirmar Senha
-                <input
-                    class="block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-solid border-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-400"
-                    type="password"
-                    name="confirm_password"
-                    value={inputFields.confirm_password}
-                    onChange={handleChange}
-                    placeholder="Ex: minha senha denovo" />
-            </label>
-            {errors.confirm_password ? (
-                <p class="text-red-500">
-                    {errors.confirm_password}
-                </p>
-            ) : <div class="mb-8"></div>}
-            <button type="submit" class="px-2.5 pb-2 pt-2 mt-4 bg-green-500 rounded-3xl w-full text-white">Redefinir Senha</button>
-            <ul class="list-disc px-4">
-                <li>Use letras maiúsculas e minúsculas</li>
-                <li>Não use informações pessoais</li>
-                <li>Não use uma senha igual a anterior</li>
-            </ul>
-        </form> 
-    )}
+        {resetDone ? <p class="px-8 mt-40 text-green-500">Senha redefinida com sucesso!</p> : (
+            <form onSubmit={handleSubmit}>
+                <p class="mb-2">Redefina sua senha com no mínimo 8 caracteres</p>
+                <label> Senha
+                    <input
+                        class="block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-solid border-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-400"
+                        type="password"
+                        name="password"
+                        value={inputFields.password}
+                        onChange={handleChange}
+                        placeholder="Ex: Minhanovesenha123@" />
+                </label>
+                {errors.password ? (
+                    <p class="text-red-500">
+                        {errors.password}
+                    </p>
+                ) : <div class="mb-8"></div>}
+                <label> Confirmar Senha
+                    <input
+                        class="block px-2.5 pb-2.5 pt-4 w-full text-sm rounded-lg border-solid border-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-400"
+                        type="password"
+                        name="confirm_password"
+                        value={inputFields.confirm_password}
+                        onChange={handleChange}
+                        placeholder="Ex: minha senha denovo" />
+                </label>
+                {errors.confirm_password ? (
+                    <p class="text-red-500">
+                        {errors.confirm_password}
+                    </p>
+                ) : <div class="mb-8"></div>}
+                <button type="submit" class="px-2.5 pb-2 pt-2 mt-4 bg-green-500 rounded-3xl w-full text-white">Redefinir Senha</button>
+                <ul class="list-disc px-4">
+                    <li>Use letras maiúsculas e minúsculas</li>
+                    <li>Não use informações pessoais</li>
+                    <li>Não use uma senha igual a anterior</li>
+                </ul>
+            </form>
+        )}
     </dialog>;
 }
 
